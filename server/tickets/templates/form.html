@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .formdiv {
+        margin: 50px;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center;
+            justify-content: center; */
+      }
+
+      .success {
+        font-size: larger;
+        color: chartreuse;
+      }
+
+      .error {
+        font-size: larger;
+        color: red;
+      }
+
+      .messages {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark">
+    <div class="formdiv">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li type="none" class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <form method="post" action="{% url 'ticket:bookTicket' %}">
+        {%if locationName %}
+        <div class="col-md-8" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault01" class="form-label">Name</label>
+          <input
+            type="text"
+            name="user"
+            class="form-control"
+            id="validationDefault01"
+            placeholder="Location Name"
+            value="{{locationName}}"
+            readonly
+          />
+        </div>
+        {% else %}
+        <div class="col-md-8" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault01" class="form-label">Name</label>
+          <input
+            type="text"
+            name="user"
+            class="form-control"
+            id="validationDefault01"
+            placeholder="Location Name"
+            required
+          />
+        </div>
+        {% endif %}
+        <div class="col-md-12" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault03" class="form-label">Location</label>
+          <input
+            type="text"
+            name="location"
+            class="form-control"
+            id="validationDefault03"
+            placeholder="Address"
+            required
+          />
+        </div>
+        <div class="col-md-12" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault02" class="form-label">Quantity</label>
+          <input
+            type="number"
+            name="quantity"
+            class="form-control"
+            id="validationDefault02"
+            placeholder="Location Description"
+            required
+          />
+        </div>
+        {% csrf_token %}
+        <div class="col-md-4" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault01" class="form-label">Date</label>
+          <input
+            type="date"
+            name="date"
+            class="form-control"
+            id="validationDefault01"
+            placeholder="Admin Username"
+            required
+          />
+        </div>
+
+        <div class="col-md-12" style="padding: 10px; color: aliceblue">
+          <label for="validationDefault02" class="form-label">Amount</label>
+          <input
+            type="number"
+            name="amount"
+            class="form-control"
+            id="validationDefault02"
+            placeholder="Location Description"
+            required
+          />
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+
+      <!-- <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+        </form>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </div> -->
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
